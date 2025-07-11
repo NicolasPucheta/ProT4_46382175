@@ -2,13 +2,13 @@ import {pool} from "./database.js";
 
 class LibroController{
 
-    /*funcion para traer todos las personas*/
+    /*funcion para traer todos los libros*/
     async getAll(req, res){
         const [result]= await pool.query('SELECT * FROM Libros');
         res.json(result);
     }
     
-    /*funcion para agregar persona*/
+    /*funcion para agregar un libro*/
     async add(req, res){
         const libro = req.body;
         const [result] = await pool.query(`INSERT INTO Libros(nombre, apellido, dni) VALUES (?, ?, ?)`, 
@@ -16,7 +16,7 @@ class LibroController{
             res.json({"Id insertado": result.insertId});
     }
 
-    /*funcion para eliminar persona*/
+    /*funcion para eliminar un libro*/
     async delete(req, res){
         const libro = req.body;
         const [result] = await pool.query(`DELETE FROM Libros WHERE id=(?)`, [libro.id]);
